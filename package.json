@@ -1,0 +1,13 @@
+{
+  "name": "govmatch-ai",
+  "version": "1.0.0",
+  "description": "GovMatch AI — Smart Government Scheme Recommendation System",
+  "scripts": {
+    "dev": "concurrently \"cd backend && node server.js\" \"cd backend && python semantic_search.py\" \"cd mp-frontend--main && npm run dev\"",
+    "backend": "cd backend && node server.js",
+    "frontend": "cd mp-frontend--main && npm run dev"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

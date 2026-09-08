@@ -1,0 +1,7 @@
+flask
+flask-cors
+sentence-transformers
+spacy
+scikit-learn
+numpy
+pandas

@@ -1,0 +1,61 @@
+# ── Node.js ──────────────────────────────────────────────────
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Frontend build output ────────────────────────────────────
+mp-frontend--main/dist
+mp-frontend--main/node_modules
+mp-frontend--main/.vite
+
+# ── Backend dev artifacts ────────────────────────────────────
+backend/node_modules
+backend/server.log
+backend/server_err.log
+backend/frontend.log
+backend/frontend_err.log
+backend/semantic_search.log
+backend/semantic_search_err.log
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info
+dist/
+build/
+.venv
+venv/
+env/
+
+# ── Git ─────────────────────────────────────────────────────
+.git
+.gitignore
+.gitattributes
+
+# ── Environment secrets ─────────────────────────────────────
+.env
+*.env.local
+*.env.development
+*.env.production
+
+# ── Editor / OS ─────────────────────────────────────────────
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ── Logs ────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Large binary files not needed in image ──────────────────
+*.mp4
+*.zip
+*.rar
+backend/embeddings_cache.npy

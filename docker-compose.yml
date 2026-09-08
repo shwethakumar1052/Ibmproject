@@ -1,0 +1,86 @@
+# ═══════════════════════════════════════════════════════════════
+# GovMatch AI — Docker Compose
+#
+# Services:
+#   frontend  — React (nginx, port 3000)
+#   backend   — Node.js Express (port 5001)
+#   nlp       — Python Flask NLP (port 5002)
+#
+# Usage:
+#   docker compose up --build          # first run (builds images)
+#   docker compose up                  # subsequent runs
+#   docker compose down                # stop all
+#   docker compose logs -f backend     # follow a service log
+# ═══════════════════════════════════════════════════════════════
+
+version: "3.9"
+
+services:
+
+  # ── Python NLP Service ───────────────────────────────────────
+  nlp:
+    build:
+      context: ./backend
+      dockerfile: semantic_search.Dockerfile
+    container_name: govmatch-nlp
+    restart: unless-stopped
+    ports:
+      - "5002:5002"
+    volumes:
+      # Mount embeddings cache so it persists between restarts (instant reload)
+      - nlp-cache:/app
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - govmatch-net
+
+  # ── Node.js Backend ──────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: govmatch-backend
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=5001
+      - PYTHON_NLP_URL=http://nlp:5002
+    volumes:
+      # Persist JSON data files so scheme data survives container restarts
+      - ./backend/schemes_enhanced.json:/app/schemes_enhanced.json
+      - ./backend/schemes.json:/app/schemes.json
+      - ./backend/admin_overrides.json:/app/admin_overrides.json
+      - ./backend/notifications/notifications.json:/app/notifications/notifications.json
+    depends_on:
+      - nlp
+    networks:
+      - govmatch-net
+
+  # ── React Frontend (nginx) ───────────────────────────────────
+  frontend:
+    build:
+      context: ./mp-frontend--main
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://backend:5001
+    container_name: govmatch-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - govmatch-net
+
+# ── Volumes ──────────────────────────────────────────────────
+volumes:
+  nlp-cache:
+    driver: local
+
+# ── Network ──────────────────────────────────────────────────
+networks:
+  govmatch-net:
+    driver: bridge

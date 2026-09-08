@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme tokens ─────────────────────────────────────────── */
+:root {
+  --bg-primary:      #f8fafc;
+  --bg-secondary:    #f1f5f9;
+  --bg-card:         rgba(255,255,255,0.75);
+  --border:          rgba(148,163,184,0.25);
+  --text-primary:    #0f172a;
+  --text-secondary:  #475569;
+  --text-muted:      #94a3b8;
+  --accent:          #4f46e5;
+  --accent-light:    #818cf8;
+  --accent-grad:     linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);
+  --success:         #10b981;
+  --warning:         #f59e0b;
+  --danger:          #ef4444;
+  --shadow-sm:       0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:       0 4px 16px rgba(0,0,0,0.10),0 2px 6px rgba(0,0,0,0.06);
+  --shadow-lg:       0 16px 48px rgba(0,0,0,0.12),0 6px 16px rgba(0,0,0,0.08);
+  --radius:          1rem;
+  --radius-sm:       0.5rem;
+  --glass-bg:        rgba(255,255,255,0.6);
+  --glass-border:    rgba(255,255,255,0.4);
+  --glass-blur:      blur(16px);
+}
+
+.dark {
+  --bg-primary:      #0f172a;
+  --bg-secondary:    #1e293b;
+  --bg-card:         rgba(30,41,59,0.8);
+  --border:          rgba(71,85,105,0.4);
+  --text-primary:    #f1f5f9;
+  --text-secondary:  #94a3b8;
+  --text-muted:      #475569;
+  --accent:          #818cf8;
+  --accent-light:    #a5b4fc;
+  --accent-grad:     linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);
+  --shadow-sm:       0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md:       0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg:       0 16px 48px rgba(0,0,0,0.6);
+  --glass-bg:        rgba(15,23,42,0.7);
+  --glass-border:    rgba(99,102,241,0.15);
+}
+
+/* ── Base typography ──────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: -apple-system, "Segoe UI", Inter, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Glassmorphism ────────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ── Gradient text ────────────────────────────────────────── */
+.gradient-text {
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Gradient button ──────────────────────────────────────── */
+.btn-primary {
+  background: var(--accent-grad);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(79,70,229,0.35);
+}
+.btn-primary:hover  { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 18px rgba(79,70,229,0.45); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { background: var(--bg-secondary); color: var(--text-primary); border-color: var(--accent-light); }
+
+/* ── Category badges ──────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.badge-education   { background:#dbeafe; color:#1d4ed8; }
+.badge-agriculture { background:#dcfce7; color:#15803d; }
+.badge-health      { background:#fce7f3; color:#9d174d; }
+.badge-business    { background:#fef3c7; color:#92400e; }
+.badge-skills      { background:#f3e8ff; color:#6b21a8; }
+.badge-women       { background:#fce7f3; color:#be185d; }
+.badge-welfare     { background:#f0fdf4; color:#166534; }
+.badge-central     { background:#eff6ff; color:#1e40af; }
+.badge-state       { background:#fef9c3; color:#854d0e; }
+
+.dark .badge-education   { background:#1e3a8a33; color:#93c5fd; }
+.dark .badge-agriculture { background:#14532d33; color:#86efac; }
+.dark .badge-health      { background:#831843aa; color:#f9a8d4; }
+.dark .badge-business    { background:#78350f33; color:#fcd34d; }
+.dark .badge-skills      { background:#4c1d9533; color:#d8b4fe; }
+.dark .badge-women       { background:#9d174d33; color:#f0abfc; }
+.dark .badge-welfare     { background:#14532d33; color:#86efac; }
+.dark .badge-central     { background:#1e3a8a33; color:#93c5fd; }
+.dark .badge-state       { background:#78350f33; color:#fcd34d; }
+
+/* ── Skeleton loader ──────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--border) 50%, var(--bg-secondary) 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Smooth page transitions ──────────────────────────────── */
+.page-enter { animation: fadeUp 0.35s ease both; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}

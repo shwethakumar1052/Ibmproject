@@ -1,0 +1,13 @@
+node_modules/
+**/node_modules/
+.env
+backend/.env
+**/.env
+__pycache__/
+*.pyc
+mp-frontend--main/dist/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
